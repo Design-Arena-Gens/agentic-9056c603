@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merhaba - Hoş Geldiniz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            animation: wave 1.5s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            75% { transform: rotate(-10deg); }
+        }
+
+        .greeting {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .time {
+            font-size: 2.5em;
+            color: #764ba2;
+            margin: 30px 0;
+            font-weight: bold;
+        }
+
+        .message {
+            font-size: 1.2em;
+            color: #666;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        .button {
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+
+        .flag {
+            font-size: 4em;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            .greeting {
+                font-size: 1.4em;
+            }
+            .time {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="flag">🇹🇷</div>
+        <h1>Merhaba!</h1>
+        <div class="greeting" id="greeting">Hoş Geldiniz</div>
+        <div class="time" id="time"></div>
+        <div class="message">
+            Güzel bir gün dileriz! ☀️
+        </div>
+        <button class="button" onclick="changeGreeting()">
+            Yeni Mesaj
+        </button>
+    </div>
+
+    <script>
+        const greetings = [
+            "Hoş Geldiniz",
+            "Nasılsınız?",
+            "İyi günler!",
+            "Günaydın!",
+            "İyi akşamlar!",
+            "Harika bir gün geçirin!",
+            "Sizi görmek güzel!",
+            "Mutlu günler!"
+        ];
+
+        function updateTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        function changeGreeting() {
+            const greetingElement = document.getElementById('greeting');
+            const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+            greetingElement.style.animation = 'none';
+            setTimeout(() => {
+                greetingElement.textContent = randomGreeting;
+                greetingElement.style.animation = 'fadeIn 0.6s ease-out';
+            }, 50);
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>
